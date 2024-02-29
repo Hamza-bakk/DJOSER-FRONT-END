@@ -6,7 +6,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="flex gradient-background p-4 w-full border-2">
+        <nav className="flex gradient-background p-4 w-full border-2">
             <div className="flex flex-row items-center justify-between w-full">
                 <div className="flex h-full w-3/12 justify-center rounded-lg items-center">
                     <div onClick={handleHBClick} className="cursor-pointer rounded-full bg-white h-10 w-10 flex items-center justify-center text-black font-bold">
@@ -19,7 +19,7 @@ const Navbar = () => {
                     <a href="/connexion" className="text-white font-bold sm:text-sm  hover:underline">CONNEXION</a>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 };
 
