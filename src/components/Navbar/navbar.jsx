@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div className="flex flex-row w-9/12 justify-around sm:gap-4 text-center items-center">
                     <a href="/propos-de-moi" className="text-white font-bold sm:text-sm hover:underline">A PROPOS DE MOI</a>
                     <a href="/contact" className="text-white font-bold  sm:text-sm  hover:underline">CONTACT</a>
-                    <a href="/register" className="text-white font-bold sm:text-sm  hover:underline">CONNEXION</a>
+                    <a href="/login" className="text-white font-bold sm:text-sm  hover:underline">CONNEXION</a>
                 </div>
             </div>
         </nav>
