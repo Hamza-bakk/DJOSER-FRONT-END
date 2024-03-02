@@ -1,6 +1,8 @@
-
+import { useAtom } from 'jotai';
+import { userAtom } from '../../stores/userAtom';
 
 const Navbar = () => {
+    const [user] = useAtom(userAtom);
     const handleHBClick = () => {
         window.location.href = "/";
     };
@@ -16,7 +18,14 @@ const Navbar = () => {
                 <div className="flex flex-row w-9/12 justify-around sm:gap-4 text-center items-center">
                     <a href="/propos-de-moi" className="text-white font-bold sm:text-sm hover:underline">A PROPOS DE MOI</a>
                     <a href="/contact" className="text-white font-bold  sm:text-sm  hover:underline">CONTACT</a>
-                    <a href="/login" className="text-white font-bold sm:text-sm  hover:underline">CONNEXION</a>
+                    {user.id == '' ? ( // Vérifier si l'ID de l'utilisateur est défini
+                        <a href="/login" className="text-white font-bold sm:text-sm hover:underline">CONNEXION</a>
+                    ) : (
+                        <a href="/logout" className="text-white font-bold sm:text-sm hover:underline">DÉCONNEXION</a>
+
+                    )}
+
+
                 </div>
             </div>
         </nav>
@@ -24,4 +33,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

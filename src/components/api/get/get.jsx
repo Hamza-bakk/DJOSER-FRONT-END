@@ -22,6 +22,7 @@ export const GetApi = {
   
         // Récupérer les infos de l'utilisateur depuis la réponse
         const userData = response.data;
+        localStorage.setItem("access_token", token);
   
         // Afficher les infos de l'utilisateur dans la console
         console.log('User data:', userData);
