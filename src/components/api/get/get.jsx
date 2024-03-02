@@ -1,30 +1,38 @@
-import axios from 'axios';
+
 import { API_URL } from '../../../../config';
+import axios from 'axios';
+import {userAtom } from '../../../stores/userAtom'
 
 
-export const JwtCreate = async (credentials) => {
-    try {
-      console.log('Credentials sent to the API request:', credentials);
+export const GetApi = {
+    
+
+    UserLogin: async (token) => {
+        console.log(`J'ai réussi a avoir le token `, token)
+      try {
+        // Configuration de l'en-tête Authorization avec le token JWT
+        const config = {
+          headers: {
+            Authorization: `JWT ${token}`
+          }
+        };
   
-      const response = await axios.post(`${API_URL}/auth/jwt/create/`, credentials);
+        // Faire la requête GET pour récupérer les infos de l'utilisateur
+        const response = await axios.get(`${API_URL}/auth/users/me/`, config);
   
-      const userData = response.data;
-      console.log('User data retrieved:', userData);
+        // Récupérer les infos de l'utilisateur depuis la réponse
+        const userData = response.data;
   
-      // Vérifier si un refresh token est disponible
-      if (userData.refresh) {
-        // Utiliser le refresh token pour obtenir un nouvel access token
-        const refreshResponse = await axios.post(`${API_URL}/auth/jwt/refresh/`, { refresh: userData.refresh });
-        const { access } = refreshResponse.data;
+        // Afficher les infos de l'utilisateur dans la console
+        console.log('User data:', userData);
   
-        // Mettre à jour les données utilisateur avec le nouvel access token
-        userData.access = access;
+        // Vous pouvez retourner les infos de l'utilisateur si nécessaire
+        return userData;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw error;
       }
+    },
   
-      return userData;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw error;
-    }
+    // Autres méthodes...
   };
-  

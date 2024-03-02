@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importez useNavigate depuis React Router
-import { RegisterUser } from '../../components/api/post/post';
+import { PostAPI } from '../../components/api/post/post';
+const { RegisterUser } = PostAPI
 
 const Register = () => {
   const navigate = useNavigate(); // Initialisez useNavigate à l'intérieur du composant

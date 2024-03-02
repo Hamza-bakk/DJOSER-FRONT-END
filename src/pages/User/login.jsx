@@ -1,10 +1,21 @@
 import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { userAtom } from '../../stores/userAtom'
 import { useNavigate } from 'react-router-dom';
-import { JwtCreate } from '../../components/api/get/get';
+import { PostAPI } from '../../components/api/post/post';
+import { GetApi } from '../../components/api/get/get';
+
+
+const { JwtCreate } = PostAPI
+const { UserLogin } = GetApi
+
+
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const [, setUser] = useAtom(userAtom);
+
 
   const [formDataLogin, setFormDataLogin] = useState({
     email: '',
@@ -22,16 +33,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Récupérer le token JWT en utilisant JwtCreate
       const { access } = await JwtCreate(formDataLogin);
-      console.log(`Token:`, access); // Vérifiez si le jeton est correct
-     
+
+      // Utiliser le token JWT pour appeler UserLogin et récupérer l'ID de l'utilisateur
+      const userData = await UserLogin(access);
+      setUser(userData.id);
+      console.log(userData.id)
+
       navigate('/');
       console.log('Connexion réussie');
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la connexion :', error);
     }
-
   };
+
 
   return (
     <div className="flex gradient-background flex-col gap-8 items-center justify-center h-screen">
