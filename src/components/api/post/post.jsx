@@ -46,15 +46,15 @@ export const PostAPI = {
       // Récupérer le token depuis le localStorage
       const token = localStorage.getItem("access_token");
       console.log(`Token avant la déconnexion`, token);
-  
+
       // Faire une requête POST à l'endpoint /jwt/verify/ pour vérifier le token
       const response = await axios.post(`${API_URL}/auth/jwt/verify/`, { token });
       console.log(response);
-  
+
       // Vérifier si la vérification du token a réussi
-      if ( token === token) {
+      if (token === token) {
         console.log('Déconnexion réussie');
-        
+
         // Supprimer le token du stockage local
         localStorage.removeItem("access_token");
       } else {
@@ -64,9 +64,19 @@ export const PostAPI = {
       console.error('Error logging out:', error);
       throw error;
     }
+  },
+
+
+ Userconfirmation: async (uid, token) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/users/activation/`, { uid: uid, token: token });
+    return response.data;
+  } catch (error) {
+    console.error('Error activating user:', error);
+    throw error;
   }
-  
-  
+},
+
 
 
 

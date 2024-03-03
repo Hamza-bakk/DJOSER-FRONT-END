@@ -1,9 +1,29 @@
-import React from 'react'
+import  { Fragment } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from '../../../config';
 
-const userconfirmation = () => {
+const UserConfirmation = () => {
+  const { uid, token } = useParams();
+  const navigate = useNavigate();
+  
+  const activeClick = () => {
+    axios.post(`${API_URL}/auth/users/activation/`, { uid: uid, token: token })
+      .then(() => {
+        navigate('/login');
+      })
+      .catch(err => {
+        alert(err.response.data);
+      });
+  };
+  
   return (
-    <div>userconfirmation</div>
-  )
-}
+    <Fragment>
+      <button onClick={activeClick} className="h-screen w-full items-center justify-center text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Activate Now
+      </button>
+    </Fragment>
+  );
+};
 
-export default userconfirmation
+export default UserConfirmation;
