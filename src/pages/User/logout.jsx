@@ -18,7 +18,7 @@ const Logout = () => {
         localStorage.removeItem('access_token');
 
         // Rediriger vers la page de connexion après la déconnexion
-        navigate('/login');
+        navigate('/');
 
         console.log('Déconnexion réussie');
       } catch (error) {

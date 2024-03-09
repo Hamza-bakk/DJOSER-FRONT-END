@@ -33,16 +33,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Récupérer le token JWT en utilisant JwtCreate
       const { access } = await JwtCreate(formDataLogin);
-
-      // Utiliser le token JWT pour appeler UserLogin et récupérer l'ID de l'utilisateur
       const userData = await UserLogin(access);
-      setUser(userData.id);
-      console.log(userData.id)
-
+      setUser({ id: userData.id, first_name: userData.first_name });
       navigate('/');
-      console.log('Connexion réussie');
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la connexion :', error);
     }
