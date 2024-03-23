@@ -5,12 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { PostAPI } from '../../components/api/post/post';
 import { GetApi } from '../../components/api/get/get';
 
-
 const { JwtCreate } = PostAPI
 const { UserLogin } = GetApi
-
-
-
 
 const Login = () => {
   const navigate = useNavigate();
